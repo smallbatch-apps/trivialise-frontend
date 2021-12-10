@@ -1,0 +1,65 @@
+import { FC } from "react";
+import Dropzone from "react-dropzone";
+import Icon from "../layout/Icon";
+import { Question } from "../../utilities/types";
+import { queryClient } from "../../utilities/queries";
+
+import { documentService } from "../../services";
+
+type Props = {
+  question: Question | null;
+};
+
+const Images: FC<Props> = ({ question }) => {
+  return (
+    <>
+      <h3 className="text-xl font-oswald ">Images</h3>
+      <div className="grid grid-cols-4 gap-5 my-5">
+        {question?.documents.map(document => (
+          <div className="group relative flex  items-center" key={document.id}>
+            <img src={document.location} className="border rounded" alt={document.title} />
+            <span
+              className="shadow absolute hidden top-2 right-2 w-6 h-6 rounded-sm bg-red-50 text-red-800 text-center group-hover:inline hover:bg-red-200 cursor-pointer"
+              onClick={async () => {
+                await documentService.delete(document.id);
+                queryClient.invalidateQueries("questions");
+              }}
+            >
+              <Icon type="far" icon="times" className="" />
+            </span>
+          </div>
+        ))}
+
+        <Dropzone
+          onDrop={async ([file]) => {
+            await documentService.upload({
+              title: file.name,
+              type: "company",
+              questionId: question?.id,
+              document: file,
+            });
+            queryClient.invalidateQueries("questions");
+
+            // const data = await request.json();
+            // setUploadedFile(data);
+          }}
+        >
+          {({ getRootProps, getInputProps }) => (
+            <section className="bg-gray-100 p-3 text-center border-dashed border-2 cursor-pointer flex items-center">
+              <div {...getRootProps()} className="">
+                <input {...getInputProps()} />
+                <p className="text-gray-600">
+                  <Icon icon="images" className="fa-lg mr-3 top-1 relative" />
+                  <br />
+                  Drop or click to upload
+                </p>
+              </div>
+            </section>
+          )}
+        </Dropzone>
+      </div>
+    </>
+  );
+};
+
+export default Images;

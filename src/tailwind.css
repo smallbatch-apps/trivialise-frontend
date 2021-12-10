@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  min-height: 100vh;
+  padding: 0;
+}
+
+.react-select .react-select__control {
+  border-color: #6b7280;
+  border-radius: 0.125rem;
+  color: #6b7280;
+}
+
+.react-select__control .react-select__multi-value {
+  border-radius: 999px;
+  border-color: rgba(209, 213, 219);
+  background-color: rgba(243, 244, 246);
+  font-size: 0.75rem;
+}
