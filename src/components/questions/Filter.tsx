@@ -1,5 +1,6 @@
 import { FC, Dispatch, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+
 import { Tag } from "../../utilities/types";
 import Icon from "../layout/Icon";
 import { Action, FilterActions } from "../../utilities/reducers";
@@ -28,7 +29,7 @@ const Filter: FC<Props> = ({ tags, filters, dispatchFilters }) => {
       </div>
       <AnimatePresence>
         {open && (
-          <motion.div className="overflow-hidden" initial={{ height: 0 }} animate={{ height: "auto" }} exit={{ height: 0 }}>
+          <motion.div initial={{ height: 0 }} animate={{ height: "auto", overflow: "visible"}} exit={{ height: 0, overflow: "hidden" }}>
             <div className="h-90 p-5">
               <label className="block mb-1" htmlFor="searchString">
                 Containing Text
@@ -65,7 +66,7 @@ const Filter: FC<Props> = ({ tags, filters, dispatchFilters }) => {
                 isMulti
                 placeholder="Not filtered by tags"
                 name="tags"
-                className="react-select flex-grow"
+                className="react-select flex-grow isolate"
                 classNamePrefix="react-select"
                 getOptionLabel={({ text }) => text}
                 getOptionValue={({ id }) => id}
