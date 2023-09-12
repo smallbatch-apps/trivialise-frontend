@@ -1,4 +1,4 @@
-import { QuestionTypes } from "./enums";
+import { QuestionTypes, EventStatuses } from "./enums";
 
 export type Answer = {
   id: string;
@@ -14,6 +14,7 @@ export type Question = {
   answers: Answer[];
   tags: Tag[];
   documents: Document[];
+  companyId?: string;
 };
 
 export type QuestionType = {
@@ -38,4 +39,23 @@ export type Document = {
 export type OrderAnswer = {
   id: string;
   sort: number;
+};
+
+export type Event = {
+  id: string;
+  seriesId: string;
+  description: string;
+  location: string;
+  startTime: Date;
+  endTime: Date;
+  status: EventStatuses;
+};
+
+export type Series = {
+  id: string;
+  companyId: string;
+  name: string;
+  description: string;
+  promoImage: string;
+  events?: Event[];
 };

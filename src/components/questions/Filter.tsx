@@ -19,7 +19,7 @@ const Filter: FC<Props> = ({ tags, filters, dispatchFilters }) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="p-3">
+    <div className="p-3 pr-0">
       <div className="p-2 px-3 cursor-pointer bg-gray-200 flex justify-between" onClick={() => setOpen(!open)}>
         <div>
           <Icon icon="search" className="fa-lg relative mr-2" /> Search for Questions

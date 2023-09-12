@@ -11,13 +11,14 @@ type Props = {
 };
 
 const Images: FC<Props> = ({ question }) => {
+  // console.log(question)
   return (
     <>
       <h3 className="text-xl font-oswald ">Images</h3>
-      <div className="grid grid-cols-4 gap-5 my-5">
+      <div className="grid grid-cols-4 gap-5 my-5 justify-center place-content-center">
         {question?.documents.map(document => (
-          <div className="group relative flex  items-center" key={document.id}>
-            <img src={document.location} className="border rounded" alt={document.title} />
+          <div className="group relative flex items-center" key={document.id}>
+            <img src={`${process.env.REACT_APP_IMAGE_HOST}/${question.companyId}/${document.location}`} className="border rounded" alt={document.title} />
             <span
               className="shadow absolute hidden top-2 right-2 w-6 h-6 rounded-sm bg-red-50 text-red-800 text-center group-hover:inline hover:bg-red-200 cursor-pointer"
               onClick={async () => {
@@ -45,8 +46,8 @@ const Images: FC<Props> = ({ question }) => {
           }}
         >
           {({ getRootProps, getInputProps }) => (
-            <section className="bg-gray-100 p-3 text-center border-dashed border-2 cursor-pointer flex items-center">
-              <div {...getRootProps()} className="">
+            <section className="bg-gray-100 p-3 col-span-2 text-center border-dashed border-2 cursor-pointer flex flex-col justify-center">
+              <div {...getRootProps()} className="justify-self-center">
                 <input {...getInputProps()} />
                 <p className="text-gray-600">
                   <Icon icon="images" className="fa-lg mr-3 top-1 relative" />

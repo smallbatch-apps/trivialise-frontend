@@ -22,7 +22,7 @@ const reorder = (list: string[], startIndex: number, endIndex: number) => {
 const AnswerList: FC<Props> = ({ question }) => {
   const [sortOrder, setSortOrder] = useState(question.answers.map(({ id }) => id));
   return (
-    <table className="w-4/5 my-3 mx-auto">
+    <table className="my-3 mx-3">
       <thead>
         <tr className="bg-gray-200">
           <th className="w-14"></th>

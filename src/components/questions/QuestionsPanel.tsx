@@ -18,7 +18,7 @@ const QuestionsPanel: FC = () => {
   const question = questions.find(({ id }) => id === activeQuestion) ?? null;
 
   return (
-    <div className="flex border">
+    <div className="flex">
       <div className="flex-1">
         <QuestionList tags={tags} questions={questions} activeQuestion={activeQuestion} setActiveQuestion={setActiveQuestion} />
         <NewQuestionForm tags={tags} />

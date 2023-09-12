@@ -1,6 +1,8 @@
 import axios from "axios";
+import { responseInterceptor } from "./interceptors";
 
 axios.defaults.baseURL = process.env.REACT_APP_API_HOST;
+axios.interceptors.response.use(responseInterceptor);
 
 export default abstract class BaseService {
   abstract entity: string;
@@ -32,7 +34,7 @@ export default abstract class BaseService {
 
   getHeaders() {
     const token = localStorage.getItem("token");
-    if (!token) return {};
+    if (!token) return;
     return { Authorization: `Bearer ${token}` };
   }
 }
